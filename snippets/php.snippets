@@ -1,0 +1,9 @@
+snippet sfclass
+	<?php
+
+	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
+	
+	${2:abstract }class ${3:`vim_snippets#Filename()`}
+	{
+		${0}
+	}

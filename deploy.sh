@@ -9,4 +9,5 @@ then
     echo vimrc file create for user $USER
 else
     echo the .vimrc file alread exists. Unable to proceed.
+    exit 1
 fi
