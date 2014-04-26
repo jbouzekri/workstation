@@ -6,6 +6,6 @@ My linux configuration to ease work ...
 Installation
 ============
 
-    cd $(
-    git clone git://github.com/jbouzekri/workstation
+    cd ~/workspace
+    git clone git://github.com/jbouzekri/workstation --recursive
     ./install.sh
