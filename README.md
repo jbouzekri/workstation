@@ -1,18 +1,11 @@
-vim
-===
+My Workstation
+==============
 
-my vim configuration.
-I am starting with vim so bear with me.
-It will mainly be used with symfony2 project and specific php development.
+My linux configuration to ease work ...
 
 Installation
 ============
 
-    git clone git://github.com/jbouzekri/vim ~/.vim
-    cd .vim
-    ./deploy.sh
-
-Nerdtree
-========
-
-Added shortcut to launch Nerdtree fn + F2
+    cd $(
+    git clone git://github.com/jbouzekri/workstation
+    ./install.sh
