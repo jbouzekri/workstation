@@ -1,2 +1,5 @@
 [mycomputer]
 localhost ansible_connection=local
+
+[customvbox]
+localhost ansible_connection=ssh ansible_ssh_user=jobou ansible_ssh_port=3022

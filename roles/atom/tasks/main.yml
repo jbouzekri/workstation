@@ -1,0 +1,9 @@
+---
+- name: Store current atom version
+  shell: 'apt-cache show atom | grep Version | cut -d" " -f2'
+  register: atom_current_install_version
+
+- name: Install atom
+  shell: wget {{ atom_deb_url }} && dpkg --install {{ atom_deb_file }} && rm {{ atom_deb_file }}
+         chdir=/tmp
+  when: atom_current_install_version.stdout != atom_version

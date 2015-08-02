@@ -1,0 +1,11 @@
+---
+- name: My custom vbox to test
+  hosts: customvbox
+  remote_user: jobou
+  sudo: yes
+
+  roles:
+    - apt
+    - atom
+    - phpstorm
+    - gnome

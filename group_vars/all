@@ -1,8 +1,31 @@
 ---
 # Variables configuration
 
+apt_keys:
+  docker:
+    server: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+
+apt_key_files:
+  - https://dl-ssl.google.com/linux/linux_signing_key.pub
+  - https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+
 apt_repository:
   - deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }}-backports main restricted universe multiverse
+  - deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main
+  - deb http://dl.google.com/linux/chrome/deb/ stable main
+  - deb https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
+  - deb-src https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
+  - deb http://archive.canonical.com/ {{ ansible_distribution_release }} partner
+  - ppa:webupd8team/java
+
+apt_debconf:
+  java:
+    name: 'oracle-java8-installer'
+    question: 'shared/accepted-oracle-license-v1-1'
+    value: 'true'
+    vtype: 'select'
+    debconf: name='oracle-java7-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
 
 apt_packages:
   - ansible
@@ -14,31 +37,53 @@ apt_packages:
   - ctorrent
   - curl
   - deluge
+  - docker-engine
   - firefox
   - flashplugin-installer
   - gimp
   - git
+  - google-chrome-stable
   - iotop
+  - keepass2
+  - libreoffice
+  - nodejs
   - ntfs-3g
   - ntp
+  - oracle-java8-installer
+  - oracle-java8-set-default
+  - pulseaudio:i386
+  - python-software-properties
   - quodlibet
   - rar
   - rsync
   - screen
+  - skype
   - sshfs
   - ssl-cert
   - strace
   - terminator
+  - thunderbird
+  - thunderbird-gnome-support
   - unrar
   - unzip
   - vim
   - vlc
 
+apt_disable_startup:
+  - docker.service
 
+apt_enable_startup: []
 
-# atom
-# lxc-docker
-# nodejs
-# skype
-# steam
-# thunderbird
+atom_version: 1.0.3
+
+gnome_launchers:
+  phpstorm:
+    name: phpStorm
+    exec: "{{ phpstorm_bin }}"
+    icon: "{{ phpstorm_dir }}/bin/webide.png"
+    cats: "Development;"
+
+gnome_dconfs:
+  favorites:
+    key: /org/gnome/shell/favorite-apps
+    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'thunderbird.desktop', 'terminator.desktop', 'vlc.desktop', 'libreoffice-writer.desktop', 'phpstorm.desktop', 'keepass2.desktop']"

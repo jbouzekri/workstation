@@ -1,0 +1,12 @@
+---
+- name: add application launcher
+  template: src=launcher.j2
+            dest=~/.local/share/applications/{{ item.key }}.desktop
+  with_dict: gnome_launchers
+  become: no
+
+- name: dconf configuration
+  dconf: user={{ ansible_ssh_user }}
+         key="{{ item.value.key }}"
+         value="{{ item.value.value }}"
+  with_dict: gnome_dconfs

@@ -2,8 +2,11 @@
 # This playbook can be used to manage my workstation
 
 - name: Jobou workstation
-  hosts: all
+  hosts: mycomputer
   sudo: yes
 
   roles:
     - apt
+    - atom
+    - phpstorm
+    - gnome

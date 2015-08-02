@@ -1,0 +1,4 @@
+---
+atom_version: 1.0.3
+atom_deb_url: "https://github.com/atom/atom/releases/download/v{{ atom_version }}/atom-amd64.deb"
+atom_deb_file: atom-amd64.deb
