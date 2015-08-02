@@ -1,0 +1,4 @@
+---
+# Default apt variable
+
+apt_cache_valid_time: 3000

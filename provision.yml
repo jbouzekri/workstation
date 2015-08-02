@@ -1,0 +1,9 @@
+---
+# This playbook can be used to manage my workstation
+
+- name: Jobou workstation
+  hosts: all
+  sudo: yes
+
+  roles:
+    - apt

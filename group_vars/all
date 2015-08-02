@@ -1,0 +1,44 @@
+---
+# Variables configuration
+
+apt_repository:
+  - deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }}-backports main restricted universe multiverse
+
+apt_packages:
+  - ansible
+  - aptitude
+  - atop
+  - build-essential
+  - ca-certificates
+  - calibre
+  - ctorrent
+  - curl
+  - deluge
+  - firefox
+  - flashplugin-installer
+  - gimp
+  - git
+  - iotop
+  - ntfs-3g
+  - ntp
+  - quodlibet
+  - rar
+  - rsync
+  - screen
+  - sshfs
+  - ssl-cert
+  - strace
+  - terminator
+  - unrar
+  - unzip
+  - vim
+  - vlc
+
+
+
+# atom
+# lxc-docker
+# nodejs
+# skype
+# steam
+# thunderbird
