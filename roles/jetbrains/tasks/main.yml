@@ -1,0 +1,25 @@
+---
+- name: check if jetbrains toolbox is installed
+  stat: path=/opt/jetbrains-toolbox
+  register: jetbrains_toolbox_folder
+
+- name: Download jetbrains toolbox
+  get_url: url={{ jetbrains_toolbox_url }} dest=/tmp/toolbox.tar.gz
+  when: not jetbrains_toolbox_folder.stat.exists
+
+- name: Unarchive jetbrains toolbox
+  unarchive: src=/tmp/toolbox.tar.gz dest=/tmp remote_src=yes
+  when: not jetbrains_toolbox_folder.stat.exists
+
+- name: Copy jetbrains toolbox folder
+  command: mv /tmp/jetbrains-toolbox-{{ jetbrains_toolbox_version }} /opt/jetbrains-toolbox
+  when: not jetbrains_toolbox_folder.stat.exists
+
+- name: Copy jetbrains toolbox icon
+  copy: src=icon.jpg dest=/opt/jetbrains-toolbox/icon.jpg
+  when: not jetbrains_toolbox_folder.stat.exists
+
+- name: add application launcher
+  template: src=launcher.j2 dest="~/.local/share/applications/jetbrains-toolbox.desktop"
+  become: no
+  when: not jetbrains_toolbox_folder.stat.exists
