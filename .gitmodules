@@ -1,6 +1,0 @@
-[submodule "roles/phpstorm"]
-	path = roles/phpstorm
-	url = https://github.com/kosssi/ansible-role-phpstorm.git
-[submodule "library/dconf"]
-	path = library/dconf
-	url = https://github.com/jistr/ansible-dconf.git
