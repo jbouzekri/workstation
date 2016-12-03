@@ -1,0 +1,22 @@
+---
+- name: check if yed is installed
+  stat: path=/opt/yed
+  register: yed_folder
+
+- name: Download yed jar version
+  get_url: url={{ yed_url }} dest=/tmp/yed.zip
+  when: not yed_folder.stat.exists
+
+- name: Unarchive yed
+  unarchive: src=/tmp/yed.zip dest=/tmp remote_src=yes
+  when: not yed_folder.stat.exists
+
+- name: Copy yed folder
+  command: mv /tmp/yed-{{ yed_version }} /opt/yed
+  when: not yed_folder.stat.exists
+
+- name: add application launcher
+  template: src=launcher.j2
+            dest=~/.local/share/applications/yed.desktop
+  become: no
+  when: not yed_folder.stat.exists

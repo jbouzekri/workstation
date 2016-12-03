@@ -79,10 +79,10 @@ gnome_launchers: {}
 #    icon: "{{ phpstorm_dir }}/bin/webide.png"
 #    cats: "Development;"
 
-gnome_dconfs: {}
-#  favorites:
-#    key: /org/gnome/shell/favorite-apps
-#    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'thunderbird.desktop', 'terminator.desktop', 'vlc.desktop', 'libreoffice-writer.desktop', 'phpstorm.desktop', 'keepass2.desktop']"
+gnome_dconfs:
+  favorites:
+    key: /org/gnome/shell/favorite-apps
+    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'keepass2.desktop', 'atom.desktop']"
 
 nodejs_version: "6.x"
 

@@ -1,0 +1,3 @@
+---
+yed_version: "3.16.2.1"
+yed_url: "https://www.yworks.com/resources/yed/demo/yEd-{{ yed_version }}.zip"

@@ -16,3 +16,22 @@
 
 - name: ensure docker start on boot and is running
   service: name=docker state=started enabled=yes
+
+- name: check if docker compose is installed
+  stat: path=/usr/local/bin/docker-compose
+  register: docker_compose_binary
+
+- name: install docker compose
+  shell: "curl -L \"https://github.com/docker/compose/releases/download/{{ docker_composer_version }}/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose"
+  when: not docker_compose_binary.stat.exists
+
+- name: make docker compose executable
+  file: path=/usr/local/bin/docker-compose state=touch mode="u+x,g+x,o+x"
+
+- name: check if docker compose completion is installed
+  stat: path=/etc/bash_completion.d/docker-compose
+  register: docker_compose_completion
+
+- name: install docker compose shell completion
+  shell: "curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose"
+  when: not docker_compose_completion.stat.exists

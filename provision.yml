@@ -9,8 +9,10 @@
     - apt
     - atom
     - virtualbox
-    - gnome
+    - nodejs
     - docker
     - steam
     - slack
     - skype
+    - gnome
+    - yed
