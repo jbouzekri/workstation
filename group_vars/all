@@ -2,22 +2,20 @@
 # Variables configuration
 
 apt_keys:
-  docker:
-    server: hkp://p80.pool.sks-keyservers.net:80
-    id: 58118E89F3A912897C070ADBF76221572C52609D
+  pinta:
+    server: eyserver.ubuntu.com
+    id: A5A1D6B2
 
 apt_key_files:
   - https://dl-ssl.google.com/linux/linux_signing_key.pub
-  - https://deb.nodesource.com/gpgkey/nodesource.gpg.key
 
 apt_repository:
   - deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }}-backports main restricted universe multiverse
-  - deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main
-  - deb http://dl.google.com/linux/chrome/deb/ stable main
-  - deb https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
-  - deb-src https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
+  - deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
   - deb http://archive.canonical.com/ {{ ansible_distribution_release }} partner
   - ppa:webupd8team/java
+  - ppa:ansible/ansible
+  - ppa:pinta-maintainers/pinta-stable
 
 apt_debconf:
   java:
@@ -29,6 +27,7 @@ apt_debconf:
 
 apt_packages:
   - ansible
+  - apt-transport-https
   - aptitude
   - atop
   - build-essential
@@ -37,7 +36,6 @@ apt_packages:
   - ctorrent
   - curl
   - deluge
-  - docker-engine
   - firefox
   - flashplugin-installer
   - gimp
@@ -46,44 +44,53 @@ apt_packages:
   - iotop
   - keepass2
   - libreoffice
-  - nodejs
+  - meld
+  - mplayer
   - ntfs-3g
   - ntp
   - oracle-java8-installer
   - oracle-java8-set-default
-  - pulseaudio:i386
-  - python-software-properties
+  - pinta
+  - python3
   - quodlibet
   - rar
   - rsync
   - screen
-  - skype
+  - software-properties-common
   - sshfs
   - ssl-cert
   - strace
   - terminator
-  - thunderbird
-  - thunderbird-gnome-support
+  - ubuntu-restricted-extras
   - unrar
   - unzip
   - vim
   - vlc
 
-apt_disable_startup:
-  - docker.service
+apt_from_urls: []
 
+apt_disable_startup: []
 apt_enable_startup: []
 
-atom_version: 1.0.3
+gnome_launchers: {}
+#  phpstorm:
+#    name: phpStorm
+#    exec: "{{ phpstorm_bin }}"
+#    icon: "{{ phpstorm_dir }}/bin/webide.png"
+#    cats: "Development;"
 
-gnome_launchers:
-  phpstorm:
-    name: phpStorm
-    exec: "{{ phpstorm_bin }}"
-    icon: "{{ phpstorm_dir }}/bin/webide.png"
-    cats: "Development;"
+gnome_dconfs: {}
+#  favorites:
+#    key: /org/gnome/shell/favorite-apps
+#    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'thunderbird.desktop', 'terminator.desktop', 'vlc.desktop', 'libreoffice-writer.desktop', 'phpstorm.desktop', 'keepass2.desktop']"
 
-gnome_dconfs:
-  favorites:
-    key: /org/gnome/shell/favorite-apps
-    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'thunderbird.desktop', 'terminator.desktop', 'vlc.desktop', 'libreoffice-writer.desktop', 'phpstorm.desktop', 'keepass2.desktop']"
+nodejs_version: "6.x"
+
+nodejs_npm_global_packages:
+  - name: gulp
+  - name: bower
+  - name: grunt
+  - name: typescript
+  - name: angular-cli
+
+docker_ubuntu_version: xenial

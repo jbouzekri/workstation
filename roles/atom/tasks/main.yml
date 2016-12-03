@@ -1,9 +1,17 @@
 ---
-- name: Store current atom version
-  shell: 'apt-cache show atom | grep Version | cut -d" " -f2'
-  register: atom_current_install_version
+- name: check if atom is installed
+  command: dpkg-query -l atom
+  register: atom_installed
+  failed_when: False
+
+- name: Download atom package
+  get_url: url={{ atom_url }} dest=/tmp/atom.deb
+  when: atom_installed.stdout.find('ii') == -1
 
 - name: Install atom
-  shell: wget {{ atom_deb_url }} && dpkg --install {{ atom_deb_file }} && rm {{ atom_deb_file }}
-         chdir=/tmp
-  when: atom_current_install_version.stdout != atom_version
+  apt: deb=/tmp/atom.deb
+  when: atom_installed.stdout.find('ii') == -1
+
+- name: Remove downloaded deb
+  file: path=/tmp/atom.deb state=absent
+  when: atom_installed.stdout.find('ii') == -1

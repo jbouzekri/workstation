@@ -3,10 +3,14 @@
 
 - name: Jobou workstation
   hosts: mycomputer
-  sudo: yes
+  become: yes
 
   roles:
     - apt
     - atom
-    - phpstorm
+    - virtualbox
     - gnome
+    - docker
+    - steam
+    - slack
+    - skype

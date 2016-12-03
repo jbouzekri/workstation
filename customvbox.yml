@@ -2,10 +2,14 @@
 - name: My custom vbox to test
   hosts: customvbox
   remote_user: jobou
-  sudo: yes
+  become: yes
 
   roles:
     - apt
     - atom
-    - phpstorm
-    - gnome
+    - virtualbox
+    - nodejs
+    - docker
+    - steam
+    - slack
+    - skype

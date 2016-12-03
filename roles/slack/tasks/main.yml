@@ -1,0 +1,17 @@
+---
+- name: check if slack-desktop is installed
+  command: dpkg-query -l slack-desktop
+  register: slack_installed
+  failed_when: False
+
+- name: Download slack-desktop package
+  get_url: url={{ slack_url }} dest=/tmp/slack-desktop.deb
+  when: slack_installed.stdout.find('ii') == -1
+
+- name: Install slack-desktop
+  apt: deb=/tmp/slack-desktop.deb
+  when: slack_installed.stdout.find('ii') == -1
+
+- name: Remove downloaded deb
+  file: path=/tmp/slack-desktop.deb state=absent
+  when: slack_installed.stdout.find('ii') == -1

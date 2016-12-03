@@ -1,0 +1,30 @@
+---
+- name: check if steam is installed
+  command: dpkg-query -l steam
+  register: steam_installed
+  failed_when: False
+
+- name: install dependencies
+  apt: name={{ item }}
+  with_items:
+    - libgl1-mesa-dri:i386
+    - libgl1-mesa-glx:i386
+    - libc6:i386
+
+- name: Download steam package
+  get_url: url={{ steam_url }} dest=/tmp/steam.deb
+  when: steam_installed.stdout.find('ii') == -1
+
+- name: steam debconf question
+  debconf: name=steam question='steam/question' value='I AGREE' vtype='select'
+
+- name: steam debconf license
+  debconf: name=steam question='steam/license' value='' vtype='note'
+
+- name: Install steam
+  apt: deb=/tmp/steam.deb
+  when: steam_installed.stdout.find('ii') == -1
+
+- name: Remove downloaded deb
+  file: path=/tmp/steam.deb state=absent
+  when: steam_installed.stdout.find('ii') == -1
