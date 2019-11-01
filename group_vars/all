@@ -43,6 +43,7 @@ apt_packages:
   - inkscape
   - iotop
   - keepassxc
+  - libglib2.0-dev
   - libreoffice
   - meld
   - mplayer

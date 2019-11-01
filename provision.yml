@@ -11,6 +11,7 @@
     - docker
     - git
     - jetbrains
+    - molotov
     - nvm
     - vscode
     - slack
@@ -20,4 +21,6 @@
     # gnome setup Arc theme and set a few of my custom settings
     # remove it if you don't want it
     - gnome
+    # My printer drivers and tools
+    - epson
 

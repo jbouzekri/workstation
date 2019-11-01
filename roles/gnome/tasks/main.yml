@@ -51,7 +51,36 @@
     path: /usr/share/themes/Arc-Dark/gnome-shell/gnome-shell.css
   tags:
     - gnome
-    
+
+- name: Change grub background to black - config file
+  lineinfile:
+    path: /usr/share/plymouth/themes/default.grub
+    regexp: '^if background_color'
+    line: if background_color 0,0,0,0; then
+  tags:
+    - gnome
+
+- name: Change grub background to black - update-grub
+  shell: "update-grub"
+  tags:
+    - gnome
+
+- name: Change plymouth background to black - config file
+  lineinfile:
+    path: /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo.script
+    regexp: "^{{ item }}"
+    line: "{{ item }} (0.0, 0.0, 0.0);"
+  with_items:
+    - "Window.SetBackgroundTopColor"
+    - "Window.SetBackgroundBottomColor"
+  tags:
+    - gnome
+
+- name: Change plymouth background to black - update-initramfs
+  shell: "update-initramfs -u"
+  tags:
+    - gnome
+
 - name: add application launcher
   become: no
   template: src=launcher.j2

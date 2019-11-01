@@ -14,10 +14,12 @@ gnome_packages:
 # Set theme
 # gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
 # gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+# gsettings set org.gnome.shell disable-user-extensions 'false'
 # gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
 # gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-running-dots-border-color '#5789ca'
 # gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-running-dots-color '#5789ca'
 # gsettings set org.gnome.desktop.background picture-uri 'file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg'
+# gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg'
 # 
 # ---
 #
@@ -52,6 +54,9 @@ gnome_settings:
   - schema: "org.gnome.desktop.interface"
     key: "icon-theme"
     value: "Papirus"
+  - schema: "org.gnome.shell"
+    key: "disable-user-extensions"
+    value: "false"
   - schema: "org.gnome.shell.extensions.user-theme"
     key: "name"
     value: "Arc-Dark"
@@ -62,6 +67,9 @@ gnome_settings:
     key: "custom-theme-running-dots-color"
     value: "#5789ca"
   - schema: "org.gnome.desktop.background"
+    key: "picture-uri"
+    value: "file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg"
+  - schema: "org.gnome.desktop.screensaver"
     key: "picture-uri"
     value: "file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg"
   - schema: "org.gnome.nautilus.preferences"
@@ -106,3 +114,18 @@ gnome_dconfs: {}
 #  favorites:
 #    key: /org/gnome/shell/favorite-apps
 #    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'keepass2.desktop', 'atom.desktop']"
+
+
+# Lock screen theme
+#
+# git clone https://github.com/devpytech/scripts.git
+# cd scripts/gresource-extract/
+# mkdir theme/icons
+# ./extract.sh 
+# sudo apt install libglib2.0-dev
+# ./build.sh
+# sudo cp /usr/share/gnome-shell/gnome-shell-theme.gresource /usr/share/gnome-shell/gnome-shell-theme.gresource.back
+# sudo mv theme/gnome-shell-theme.gresource /usr/share/gnome-shell/gnome-shell-theme.gresource
+# #lockDialogGroup {
+#  background: #41494c url(resource:///org/gnome/shell/theme/noise-texture.png);
+#  background-repeat: repeat; }

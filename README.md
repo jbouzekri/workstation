@@ -18,12 +18,12 @@ Then provision the computer :
 
 ```
 $ cd ~/workspace
-$ git clone git://github.com/jbouzekri/workstation --recursive
+$ git clone git://github.com/jbouzekri/workstation
 $ cd workstation
 $ ansible-playbook -i hosts provision.yml -u jobou --ask-become-pass
 ```
 
-**WARNING : provision.yml enables the role gnome which change the theme and setup a few settings as I prefer. Disable it with `--skip-tags "gnome"` if you don't want this.**
+**WARNING : provision.yml enables : the role gnome which change the theme and setup a few settings as I prefer. Disable it with `--skip-tags "gnome"` if you don't want this. Same thing for the role epson which installs my printer drivers. Disable it with `--skip-tags "epson"`**
 
 ## Testing
 

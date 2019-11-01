@@ -1,0 +1,36 @@
+---
+- name: check if imagescan is installed
+  command: dpkg-query -l imagescan
+  register: imagescan_installed
+  failed_when: False
+  tags:
+    - epson
+
+- name: Download epson package
+  get_url: url={{ epson_url }} dest="/tmp/{{ epson_deb }}.tar.gz"
+  when: imagescan_installed.stdout.find('ii') == -1
+  tags:
+    - epson
+
+- name: Unarchive epson
+  unarchive:
+    src: "/tmp/{{ epson_deb }}.tar.gz"
+    dest: "/tmp"
+  when: imagescan_installed.stdout.find('ii') == -1
+  tags:
+    - epson
+
+- name: Install epson
+  shell: "/tmp/{{ epson_deb }}/install.sh"
+  when: imagescan_installed.stdout.find('ii') == -1
+  tags:
+    - epson
+
+- name: Remove downloaded and unarchived archive
+  file: path="{{ item }}" state=absent
+  with_items:
+    - "/tmp/{{ epson_deb }}"
+    - "/tmp/{{ epson_deb }}.tar.gz"
+  when: imagescan_installed.stdout.find('ii') == -1
+  tags:
+    - epson
