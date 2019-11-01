@@ -1,0 +1,13 @@
+---
+- name: check if molotov is installed
+  command: dpkg-query -l molotov
+  register: molotov_installed
+  failed_when: False
+
+- name: Download molotov package
+  get_url: url={{ molotov_url }} dest=/usr/local/bin/molotov
+  when: molotov_installed.stdout.find('ii') == -1
+
+- name: make molotov.AppImage executable
+  file: path=/usr/local/bin/molotov state=touch mode="a+x"
+  when: molotov_installed.stdout.find('ii') == -1
