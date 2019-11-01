@@ -1,6 +1,6 @@
 ---
 - name: check if skype is installed
-  command: dpkg-query -l skype
+  command: dpkg-query -l skypeforlinux
   register: skype_installed
   failed_when: False
 

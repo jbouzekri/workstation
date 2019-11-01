@@ -1,20 +1,31 @@
-My Workstation
-==============
+# My Workstation
 
 My ansible provisionning for my Ubuntu Gnome computer
 
-Usage
------
+## Usage
 
-Install ansible in your host machine : [How to install ansible](http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu).
+Install ansible in your host machine : [How to install ansible](http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu) :
 
-    cd ~/workspace
-    git clone git://github.com/jbouzekri/workstation --recursive
-    cd workstation
-    ansible-playbook -i hosts provision.yml -u jobou --ask-sudo-pass
+```
+$ sudo apt update
+$ sudo apt install software-properties-common
+$ sudo apt-add-repository --yes --update ppa:ansible/ansible
+$ sudo apt install ansible
+$ sudo apt install aptitude
+```
 
-Testing
--------
+Then provision the computer :
+
+```
+$ cd ~/workspace
+$ git clone git://github.com/jbouzekri/workstation --recursive
+$ cd workstation
+$ ansible-playbook -i hosts provision.yml -u jobou --ask-become-pass
+```
+
+**WARNING : provision.yml enables the role gnome which change the theme and setup a few settings as I prefer. Disable it with `--skip-tags "gnome"` if you don't want this.**
+
+## Testing
 
 I have a Virtualbox with a fresh Ubuntu 15.04 install and the user jobou in the sudoers group.
 

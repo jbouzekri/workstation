@@ -16,7 +16,7 @@
   when: not jetbrains_toolbox_folder.stat.exists
 
 - name: Copy jetbrains toolbox icon
-  copy: src=icon.jpg dest=/opt/jetbrains-toolbox/icon.jpg
+  copy: src=icon.png dest=/opt/jetbrains-toolbox/icon.png
   when: not jetbrains_toolbox_folder.stat.exists
 
 - name: add application launcher

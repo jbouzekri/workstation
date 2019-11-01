@@ -1,0 +1,17 @@
+---
+- name: check if vscode is installed
+  command: dpkg-query -l code
+  register: vscode_installed
+  failed_when: False
+
+- name: Download vscode package
+  get_url: url={{ vscode_url }} dest=/tmp/code.deb
+  when: vscode_installed.stdout.find('ii') == -1
+
+- name: Install vscode
+  apt: deb=/tmp/code.deb
+  when: vscode_installed.stdout.find('ii') == -1
+
+- name: Remove downloaded deb
+  file: path=/tmp/code.deb
+  when: vscode_installed.stdout.find('ii') == -1

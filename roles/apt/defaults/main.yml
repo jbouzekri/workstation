@@ -2,3 +2,15 @@
 # Default apt variable
 
 apt_cache_valid_time: 3000
+
+apt_keys: {}
+
+apt_key_files: []
+
+apt_from_urls: []
+
+apt_cleanup_files: []
+
+apt_disable_startup: []
+
+apt_enable_startup: []

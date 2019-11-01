@@ -1,0 +1,108 @@
+---
+gnome_packages:
+  - arc-theme
+  - chrome-gnome-shell
+  - gnome-tweaks
+  - gnome-shell-extensions
+  - gnome-shell-extension-caffeine
+  - gnome-shell-extension-weather
+  - gnome-shell-extension-system-monitor
+  - gnome-shell-extension-show-ip
+  - gnome-shell-extension-hide-veth
+  - papirus-icon-theme
+
+# Set theme
+# gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
+# gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+# gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
+# gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-running-dots-border-color '#5789ca'
+# gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-running-dots-color '#5789ca'
+# gsettings set org.gnome.desktop.background picture-uri 'file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg'
+# 
+# ---
+#
+# Setup helpful things
+# gsettings set org.gnome.nautilus.preferences default-folder-viewer "list-view"
+# gsettings set org.gnome.desktop.sound event-sounds false
+# gsettings set org.gnome.desktop.calendar show-weekdate true
+# gsettings set org.gnome.desktop.interface clock-show-weekday true
+# gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'org.keepassxc.KeePassXC.desktop', 'code.desktop']"
+# 
+# ---
+#
+# Change bindings such as Print Screen launch Flameshot :
+#
+# Backup previous values just in case :
+# $ gsettings get org.gnome.settings-daemon.plugins.media-keys screenshot 
+# ['Print']
+# $ gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings
+# @as []
+#
+# New bindings :
+# gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
+# gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'flameshot'
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/usr/bin/flameshot gui'
+# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding 'Print'
+
+gnome_settings:
+  - schema: "org.gnome.desktop.interface"
+    key: "gtk-theme"
+    value: "Arc-Dark"
+  - schema: "org.gnome.desktop.interface"
+    key: "icon-theme"
+    value: "Papirus"
+  - schema: "org.gnome.shell.extensions.user-theme"
+    key: "name"
+    value: "Arc-Dark"
+  - schema: "org.gnome.shell.extensions.dash-to-dock"
+    key: "custom-theme-running-dots-border-color"
+    value: "#5789ca"
+  - schema: "org.gnome.shell.extensions.dash-to-dock"
+    key: "custom-theme-running-dots-color"
+    value: "#5789ca"
+  - schema: "org.gnome.desktop.background"
+    key: "picture-uri"
+    value: "file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg"
+  - schema: "org.gnome.nautilus.preferences"
+    key: "default-folder-viewer"
+    value: "list-view"
+  - schema: "org.gnome.desktop.sound"
+    key: "event-sounds"
+    value: "false"
+  - schema: "org.gnome.desktop.calendar"
+    key: "show-weekdate"
+    value: "true"
+  - schema: "org.gnome.desktop.interface"
+    key: "clock-show-weekday"
+    value: "true"
+  - schema: "org.gnome.shell"
+    key: "favorite-apps"
+    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'org.keepassxc.KeePassXC.desktop', 'code.desktop']"
+  - schema: "org.gnome.settings-daemon.plugins.media-keys"
+    key: "screenshot"
+    value: '[]'
+  - schema: "org.gnome.settings-daemon.plugins.media-keys"
+    key: "custom-keybindings"
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+  - schema: "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+    key: "name"
+    value: 'flameshot'
+  - schema: "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+    key: "command"
+    value: '/usr/bin/flameshot gui'
+  - schema: "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+    key: "binding"
+    value: 'Print'
+
+gnome_launchers: {}
+#  phpstorm:
+#    name: phpStorm
+#    exec: "{{ phpstorm_bin }}"
+#    icon: "{{ phpstorm_dir }}/bin/webide.png"
+#    cats: "Development;"
+
+gnome_dconfs: {}
+#  favorites:
+#    key: /org/gnome/shell/favorite-apps
+#    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'keepass2.desktop', 'atom.desktop']"

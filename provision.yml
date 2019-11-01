@@ -7,13 +7,17 @@
 
   roles:
     - apt
-    - atom
-    - virtualbox
-    - nodejs
+    - chrome
     - docker
-    - steam
+    - git
+    - jetbrains
+    - nvm
+    - vscode
     - slack
     - skype
-    - gnome
+    - teamviewer
     - yed
-    - jetbrains
+    # gnome setup Arc theme and set a few of my custom settings
+    # remove it if you don't want it
+    - gnome
+

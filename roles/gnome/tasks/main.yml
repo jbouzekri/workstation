@@ -1,12 +1,70 @@
 ---
-- name: add application launcher
-  template: src=launcher.j2
-            dest=~/.local/share/applications/{{ item.key }}.desktop
-  with_dict: "{{ gnome_launchers }}"
-  become: no
+- name: add gnome packages
+  apt: name="{{ packages }}" state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }} force=yes
+  vars:
+    packages: "{{ gnome_packages }}"
+  tags:
+    - gnome
 
+- name: check if gnome user theme extension is installed
+  become: no
+  command: gnome-extensions list
+  register: gnome_user_theme_installed
+  failed_when: False
+  tags:
+    - gnome
+
+- name: Download gnome user theme extension
+  become: no
+  get_url: url="https://extensions.gnome.org/extension-data/user-themegnome-shell-extensions.gcampax.github.com.v38.shell-extension.zip" dest=/tmp/user-themegnome-shell-extensions.gcampax.github.com.v38.shell-extension.zip
+  when: gnome_user_theme_installed.stdout.find('user-theme@gnome-shell-extensions.gcampax.github.com') == -1
+  tags:
+    - gnome
+
+- name: Install and enable gnome user theme extension
+  become: no
+  shell: >
+    gnome-extensions install --force /tmp/user-themegnome-shell-extensions.gcampax.github.com.v38.shell-extension.zip && gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
+  when: gnome_user_theme_installed.stdout.find('user-theme@gnome-shell-extensions.gcampax.github.com') == -1
+  tags:
+    - gnome
+
+- name: Remove gnome user theme extension zip
+  become: no
+  file: path=/tmp/user-themegnome-shell-extensions.gcampax.github.com.v38.shell-extension.zip state=absent
+  when: gnome_user_theme_installed.stdout.find('user-theme@gnome-shell-extensions.gcampax.github.com') == -1
+  tags:
+    - gnome
+
+- name: Apply gnome settings
+  become: no
+  shell: >
+    gsettings set {{ item.schema }} {{ item.key }} "{{ item.value }}"
+  with_items: "{{ gnome_settings }}"
+  tags:
+    - gnome
+
+- name: Change login page to Arc-Dark
+  alternatives:
+    name: gdm3.css
+    link: /usr/share/gnome-shell/theme/gdm3.css
+    path: /usr/share/themes/Arc-Dark/gnome-shell/gnome-shell.css
+  tags:
+    - gnome
+    
+- name: add application launcher
+  become: no
+  template: src=launcher.j2
+            dest={{ lookup('env','HOME') }}/.local/share/applications/{{ item.key }}.desktop
+  with_dict: "{{ gnome_launchers }}"
+  tags:
+    - gnome
+  
 - name: dconf configuration
+  become: no
   dconf: user={{ ansible_ssh_user }}
          key="{{ item.value.key }}"
          value="{{ item.value.value }}"
   with_dict: "{{ gnome_dconfs }}"
+  tags:
+    - gnome

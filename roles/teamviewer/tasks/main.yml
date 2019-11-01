@@ -1,0 +1,17 @@
+---
+- name: check if teamviewer is installed
+  command: dpkg-query -l teamviewer
+  register: teamviewer_installed
+  failed_when: False
+
+- name: Download teamviewer package
+  get_url: url={{ teamviewer_url }} dest=/tmp/teamviewer.deb
+  when: teamviewer_installed.stdout.find('ii') == -1
+
+- name: Install teamviewer
+  apt: deb=/tmp/teamviewer.deb
+  when: teamviewer_installed.stdout.find('ii') == -1
+
+- name: Remove downloaded deb
+  file: path=/tmp/teamviewer.deb state=absent
+  when: teamviewer_installed.stdout.find('ii') == -1

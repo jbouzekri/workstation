@@ -22,8 +22,9 @@
   with_dict: "{{ apt_debconf }}"
 
 - name: add mandatory packages
-  apt: pkg={{ item }} state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }} force=yes
-  with_items: "{{ apt_packages }}"
+  apt: name="{{ packages }}" state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }} force=yes
+  vars:
+    packages: "{{ apt_packages }}"
 
 - name: add mandatory packages from urls
   apt: pkg={{ item }} state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }} force=yes
@@ -31,6 +32,12 @@
 
 - name: apt upgrade
   apt: upgrade=yes
+
+- name: Remove files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items: "{{ apt_cleanup_files }}"
 
 - name: disable on startup
   service: name={{ item }} enabled=no

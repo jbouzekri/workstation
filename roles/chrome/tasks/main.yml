@@ -1,0 +1,9 @@
+---
+- name: add chrome apt key
+  apt_key: url="https://dl-ssl.google.com/linux/linux_signing_key.pub" state=present
+
+- name: add chrome apt repositories
+  apt_repository: repo='deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' filename="google-chrome" state=present update_cache=yes
+
+- name: install chrome
+  apt: name="google-chrome-stable" state=latest force=yes

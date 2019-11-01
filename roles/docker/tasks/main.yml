@@ -1,12 +1,17 @@
 ---
 - name: add docker apt key
-  apt_key: keyserver=hkp://ha.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg id=9DC858229FC7DD38854AE2D88D81803C0EBFCD88
 
 - name: add docker repository
-  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-{{ docker_ubuntu_version }} main' state=present update_cache=yes
+  apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ docker_ubuntu_version }} stable' state=present update_cache=yes
 
 - name: install docker
-  apt: name=docker-engine
+  apt: name="{{ packages }}" state=latest force=yes
+  vars:
+    packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
 
 - name: create docker group
   group: name=docker state=present
@@ -22,7 +27,10 @@
   register: docker_compose_binary
 
 - name: install docker compose
-  shell: "curl -L \"https://github.com/docker/compose/releases/download/{{ docker_composer_version }}/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose"
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_composer_version }}/docker-compose-Linux-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: '0775'
   when: not docker_compose_binary.stat.exists
 
 - name: make docker compose executable

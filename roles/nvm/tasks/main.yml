@@ -1,0 +1,22 @@
+---
+- name: "Install nvm"
+  become: no
+  shell: >
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/{{ nvm_version }}/install.sh | bash
+  args:
+    warn: no
+
+- name: make nvm.sh executable
+  become: no
+  file: path={{ lookup('env','HOME') }}/.nvm/nvm.sh state=touch mode="u+x"
+
+- name: "Install last lts version of node"
+  become: no
+  shell: >
+    . {{ lookup('env','HOME') }}/.nvm/nvm.sh && nvm install --lts
+
+- name: "Install global packages"
+  become: no
+  shell: >
+    . {{ lookup('env','HOME') }}/.nvm/nvm.sh && npm install -g {{ item }}
+  with_items: "{{ nvm_npm_global_packages }}"

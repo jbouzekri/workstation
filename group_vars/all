@@ -1,96 +1,91 @@
 ---
 # Variables configuration
-
-apt_keys:
-  pinta:
-    server: eyserver.ubuntu.com
-    id: A5A1D6B2
-
-apt_key_files:
-  - https://dl-ssl.google.com/linux/linux_signing_key.pub
-
 apt_repository:
   - deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }}-backports main restricted universe multiverse
-  - deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
   - deb http://archive.canonical.com/ {{ ansible_distribution_release }} partner
-  - ppa:webupd8team/java
-  - ppa:ansible/ansible
-  - ppa:pinta-maintainers/pinta-stable
+  - ppa:linuxuprising/java
 
 apt_debconf:
-  java:
-    name: 'oracle-java8-installer'
-    question: 'shared/accepted-oracle-license-v1-1'
+  java-present:
+    name: 'oracle-java13-installer'
+    question: 'shared/present-oracle-license-v1-2'
     value: 'true'
     vtype: 'select'
-    debconf: name='oracle-java7-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+    debconf: name='oracle-java13-installer' question='shared/present-oracle-license-v1-2' value='true' vtype='select'
+  java-accepted:
+    name: 'oracle-java13-installer'
+    question: 'shared/accepted-oracle-license-v1-2'
+    value: 'true'
+    vtype: 'select'
+    debconf: name='oracle-java13-installer' question='shared/accepted-oracle-license-v1-2' value='true' vtype='select'
 
 apt_packages:
-  - ansible
   - apt-transport-https
   - aptitude
   - atop
   - build-essential
   - ca-certificates
+  - caffeine
   - calibre
+  - clamtk
+  - clamtk-gnome
   - ctorrent
   - curl
   - deluge
+  - filezilla
   - firefox
+  - flameshot
   - flashplugin-installer
   - gimp
   - git
-  - google-chrome-stable
+  - gnupg-agent
+  - htop
+  - inkscape
   - iotop
-  - keepass2
+  - keepassxc
   - libreoffice
   - meld
   - mplayer
+  - ncdu
   - ntfs-3g
   - ntp
-  - oracle-java8-installer
-  - oracle-java8-set-default
+  - oracle-java13-installer
+  - oracle-java13-set-default
+  - p7zip-full
+  - p7zip-rar
   - pinta
   - python3
   - quodlibet
   - rar
   - rsync
   - screen
+  - simplescreenrecorder
   - software-properties-common
   - sshfs
   - ssl-cert
+  - steam
   - strace
   - terminator
   - ubuntu-restricted-extras
   - unrar
   - unzip
   - vim
+  - virtualbox
   - vlc
+  - zip
 
-apt_from_urls: []
+git_global_configs:
+  - name: user.email
+    value: "jonathan.bouzekri@gmail.com"
+  - name: user.name
+    value: "Jonathan Bouzekri"
 
-apt_disable_startup: []
-apt_enable_startup: []
+nvm_npm_global_packages:
+  - gulp
+  - bower
+  - grunt
+  - typescript
+  - "@angular/cli"
 
-gnome_launchers: {}
-#  phpstorm:
-#    name: phpStorm
-#    exec: "{{ phpstorm_bin }}"
-#    icon: "{{ phpstorm_dir }}/bin/webide.png"
-#    cats: "Development;"
-
-gnome_dconfs:
-  favorites:
-    key: /org/gnome/shell/favorite-apps
-    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'keepass2.desktop', 'atom.desktop']"
-
-nodejs_version: "6.x"
-
-nodejs_npm_global_packages:
-  - name: gulp
-  - name: bower
-  - name: grunt
-  - name: typescript
-  - name: angular-cli
-
-docker_ubuntu_version: xenial
+docker_ubuntu_version: disco
+virtualbox_ubuntu_version: disco
