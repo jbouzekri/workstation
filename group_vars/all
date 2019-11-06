@@ -75,6 +75,12 @@ apt_packages:
   - vlc
   - zip
 
+snap_packages:
+  - storage-explorer
+
+snap_connect_cmds:
+  - snap connect storage-explorer:password-manager-service :password-manager-service
+
 git_global_configs:
   - name: user.email
     value: "jonathan.bouzekri@gmail.com"
