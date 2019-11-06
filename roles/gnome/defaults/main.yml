@@ -29,6 +29,7 @@ gnome_packages:
 # gsettings set org.gnome.desktop.calendar show-weekdate true
 # gsettings set org.gnome.desktop.interface clock-show-weekday true
 # gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'org.keepassxc.KeePassXC.desktop', 'code.desktop']"
+# gsettings set org.gnome.desktop.interface enable-hot-corners true
 # 
 # ---
 #
@@ -87,6 +88,9 @@ gnome_settings:
   - schema: "org.gnome.shell"
     key: "favorite-apps"
     value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'org.keepassxc.KeePassXC.desktop', 'code.desktop']"
+  - schema: "org.gnome.desktop.interface"
+    key: "enable-hot-corners"
+    value: "true"
   - schema: "org.gnome.settings-daemon.plugins.media-keys"
     key: "screenshot"
     value: '[]'

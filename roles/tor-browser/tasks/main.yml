@@ -22,9 +22,9 @@
   file: path="/opt/tor-browser" owner="{{ lookup('env','USERNAME') }}" recurse="yes" state="directory"
   when: not tor_browser_directory.stat.exists
 
-- name: Remove downloaded deb
-  file: path=/tmp/skype.deb state=absent
-  when: not tor_browser_directory.stat.exists
+- name: Remove downloaded tar
+  file: path=/tmp/torbrowser.tar.xz state=absent
+  when: tor_browser_directory.stat.exists
 
 - name: Register tor-browser desktop app
   become: no
