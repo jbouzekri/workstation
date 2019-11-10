@@ -1,0 +1,8 @@
+[Desktop Entry]
+X-SnapInstanceName=storage-explorer
+Name=Azure Storage Explorer
+Exec=/opt/storage-explorer/StorageExplorer
+Icon=/opt/storage-explorer/icon.png
+Terminal=false
+Type=Application
+Categories=Development;

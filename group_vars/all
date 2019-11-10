@@ -75,11 +75,11 @@ apt_packages:
   - vlc
   - zip
 
-snap_packages:
-  - storage-explorer
+apt_from_urls: []
 
-snap_connect_cmds:
-  - snap connect storage-explorer:password-manager-service :password-manager-service
+snap_packages: []
+
+snap_connect_cmds: []
 
 git_global_configs:
   - name: user.email
