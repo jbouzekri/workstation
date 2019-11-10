@@ -1,6 +1,6 @@
 ---
 - name: add gnome packages
-  apt: name="{{ packages }}" state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }} force=yes
+  apt: name="{{ packages }}" state=latest update_cache=true force=yes
   vars:
     packages: "{{ gnome_packages }}"
   tags:
@@ -36,11 +36,26 @@
   tags:
     - gnome
 
+- name: Enable gnome extensions
+  become: no
+  shell: "gnome-extensions enable {{ item }}"
+  with_items: "{{ gnome_extensions }}"
+  tags:
+    - gnome
+
 - name: Apply gnome settings
   become: no
   shell: >
     gsettings set {{ item.schema }} {{ item.key }} "{{ item.value }}"
   with_items: "{{ gnome_settings }}"
+  tags:
+    - gnome
+
+- name: Apply gnome settings with schemadir
+  become: no
+  shell: >
+    gsettings --schemadir {{ item.schemadir }} set {{ item.schema }} {{ item.key }} "{{ item.value }}"
+  with_items: "{{ gnome_settings_with_schemadir }}"
   tags:
     - gnome
 
@@ -51,6 +66,27 @@
     path: /usr/share/themes/Arc-Dark/gnome-shell/gnome-shell.css
   tags:
     - gnome
+
+# - name: Change lock screen to Arc-Dark - check if already done
+#   stat: path=/usr/share/gnome-shell/theme/Yaru.back
+#   register: gnome_lock_screen_theme_yaru_backup_directory
+#   tags:
+#     - gnome
+
+# - name: Change lock screen to Arc-Dark - Backup Yaru folder
+#   command: mv /usr/share/gnome-shell/theme/Yaru /usr/share/gnome-shell/theme/Yaru.back
+#   when: not gnome_lock_screen_theme_yaru_backup_directory.stat.exists
+#   tags:
+#     - gnome
+
+# - name: Change lock screen to Arc-Dark - enable Arc-Dark
+#   file:
+#     src: /usr/share/themes/Arc-Dark/gnome-shell/
+#     dest: /usr/share/gnome-shell/theme/Yaru
+#     state: link
+#   when: not gnome_lock_screen_theme_yaru_backup_directory.stat.exists
+#   tags:
+#     - gnome
 
 - name: Change grub background to black - config file
   lineinfile:

@@ -11,6 +11,12 @@ gnome_packages:
   - gnome-shell-extension-hide-veth
   - papirus-icon-theme
 
+gnome_extensions:
+  - openweather-extension@jenslody.de
+  - caffeine@patapon.info
+  - workspace-indicator@gnome-shell-extensions.gcampax.github.com
+  - system-monitor@paradoxxx.zero.gmail.com
+
 # Set theme
 # gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
 # gsettings set org.gnome.desktop.interface icon-theme "Papirus"
@@ -30,6 +36,7 @@ gnome_packages:
 # gsettings set org.gnome.desktop.interface clock-show-weekday true
 # gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'org.keepassxc.KeePassXC.desktop', 'code.desktop']"
 # gsettings set org.gnome.desktop.interface enable-hot-corners true
+# gsettings set org.gnome.desktop.privacy report-technical-problems false
 # 
 # ---
 #
@@ -47,6 +54,17 @@ gnome_packages:
 # gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'flameshot'
 # gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/usr/bin/flameshot gui'
 # gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding 'Print'
+#
+# ---
+#
+# Extensions settings
+#
+# gsettings set org.gnome.shell.extensions.openweather unit 'celsius'
+# gsettings set org.gnome.shell.extensions.openweather pressure-unit 'hPa'
+# gsettings set org.gnome.shell.extensions.openweather city '48.9724604,1.9830623>Vernouillet, Saint-Germain-en-Laye, Yvelines, Île-de-France, France métropolitaine, 78540, France >-1'
+# gsettings set org.gnome.shell.extensions.openweather wind-speed-unit 'kph'
+# gsettings set org.gnome.shell.extensions.openweather position-in-panel 'right'
+# gsettings set org.gnome.shell.extensions.openweather menu-alignment 77.0
 
 gnome_settings:
   - schema: "org.gnome.desktop.interface"
@@ -91,6 +109,9 @@ gnome_settings:
   - schema: "org.gnome.desktop.interface"
     key: "enable-hot-corners"
     value: "true"
+  - schema: "org.gnome.desktop.privacy"
+    key: "report-technical-problems"
+    value: "false"
   - schema: "org.gnome.settings-daemon.plugins.media-keys"
     key: "screenshot"
     value: '[]'
@@ -106,6 +127,38 @@ gnome_settings:
   - schema: "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
     key: "binding"
     value: 'Print'
+  - schema: "org.gnome.shell.extensions.openweather"
+    key: "unit"
+    value: 'celsius'
+  - schema: "org.gnome.shell.extensions.openweather"
+    key: "pressure-unit"
+    value: 'hPa'
+  - schema: "org.gnome.shell.extensions.openweather"
+    key: "city"
+    value: '48.9724604,1.9830623>Vernouillet, Saint-Germain-en-Laye, Yvelines, Île-de-France, France métropolitaine, 78540, France >-1'
+  - schema: "org.gnome.shell.extensions.openweather"
+    key: "wind-speed-unit"
+    value: 'kph'
+  - schema: "org.gnome.shell.extensions.openweather"
+    key: "position-in-panel"
+    value: 'right'
+  - schema: "org.gnome.shell.extensions.openweather"
+    key: "menu-alignment"
+    value: '77.0'
+
+# Extensions settings with schema dir
+#
+# gsettings --schemadir /usr/share/gnome-shell/extensions/system-monitor@paradoxxx.zero.gmail.com/schemas/ set org.gnome.shell.extensions.system-monitor icon-display false
+# gsettings --schemadir /usr/share/gnome-shell/extensions/system-monitor@paradoxxx.zero.gmail.com/schemas/ set org.gnome.shell.extensions.system-monitor show-tooltip true
+gnome_settings_with_schemadir:
+  - schema: "org.gnome.shell.extensions.system-monitor"
+    key: "icon-display"
+    value: 'false'
+    schemadir: "/usr/share/gnome-shell/extensions/system-monitor@paradoxxx.zero.gmail.com/schemas/"
+  - schema: "org.gnome.shell.extensions.system-monitor"
+    key: "show-tooltip"
+    value: 'true'
+    schemadir: "/usr/share/gnome-shell/extensions/system-monitor@paradoxxx.zero.gmail.com/schemas/"
 
 gnome_launchers: {}
 #  phpstorm:
