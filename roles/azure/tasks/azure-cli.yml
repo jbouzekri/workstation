@@ -1,0 +1,24 @@
+---
+- name: apt update
+  apt:
+    update_cache: yes
+
+- name: add azure cli dependencies
+  apt: name="{{ packages }}" state=latest update_cache=true force=yes
+  vars:
+    packages: "{{ azure_cli_dependencies }}"
+
+- name: Install microsoft signing key
+  shell: "curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null"
+  args:
+    warn: no
+
+- name: Add the Azure CLI software repository
+  shell: "AZ_REPO=$(lsb_release -cs) ; echo 'deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ azure_cli_ubuntu_version }} main' | tee /etc/apt/sources.list.d/azure-cli.list"
+
+- name: apt update
+  apt:
+    update_cache: yes
+
+- name: install azure cli
+  apt: name="azure-cli" state=latest

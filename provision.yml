@@ -8,6 +8,7 @@
   roles:
     - apt
     - snap
+    - azure
     - chrome
     - docker
     - git
@@ -16,7 +17,6 @@
     - nvm
     - vscode
     - slack
-    #- azure
     - skype
     - teamviewer
     - tor-browser

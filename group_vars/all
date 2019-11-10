@@ -96,3 +96,4 @@ nvm_npm_global_packages:
 
 docker_ubuntu_version: disco
 virtualbox_ubuntu_version: disco
+azure_cli_ubuntu_version: disco

@@ -6,3 +6,15 @@ storage_explorer_dependencies:
   - aspnetcore-runtime-2.2
   - libgconf-2-4
   - gnome-keyring
+
+# Waiting for missing libgnome-keyring package
+install_azure_exporer: false
+
+azure_cli_dependencies:
+  - ca-certificates
+  - curl
+  - apt-transport-https
+  - lsb-release
+  - gnupg
+
+azure_cli_ubuntu_version: "$AZ_REPO"

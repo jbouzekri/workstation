@@ -3,48 +3,15 @@
   stat: path=/opt/storage-explorer
   register: storage_explorer_directory
 
-- name: install microsoft repository
-  apt: deb={{ microsoft_deb_url }}
+- name: Install azure explorer
+  include: "azure-explorer.yml"
+  when: not storage_explorer_directory.stat.exists and install_azure_explorer
 
-- name: apt update
-  apt:
-    update_cache: yes
+- name: Check if azure cli is installed
+  command: which az
+  ignore_errors: yes
+  register: az_cli_check
 
-- name: add storage-explorer dependencies
-  apt: name="{{ packages }}" state=latest update_cache=true force=yes
-  vars:
-    packages: "{{ storage_explorer_dependencies }}"
-  when: not storage_explorer_directory.stat.exists
-
-- name: Download storage-explorer package
-  get_url: url={{ storage_explorer_url }} dest=/tmp/StorageExplorer-linux-x64.tar.gz
-  when: not storage_explorer_directory.stat.exists
-
-- name: Create storage-explorer folder
-  file:
-    path: /opt/storage-explorer
-    state: directory
-    mode: '0755'
-
-- name: Unarchive storage-explorer
-  unarchive:
-    src: /tmp/StorageExplorer-linux-x64.tar.gz
-    dest: /opt/storage-explorer
-  when: not storage_explorer_directory.stat.exists
-
-- name: storage-explorer permissions
-  file: path="/opt/storage-explorer" owner="{{ lookup('env','USERNAME') }}" recurse="yes" state="directory"
-  when: not storage_explorer_directory.stat.exists
-
-- name: Remove downloaded tar
-  file: path=/tmp/StorageExplorer-linux-x64.tar.gz state=absent
-  when: storage_explorer_directory.stat.exists
-
-- name: Copy storage-explorer icon
-  copy: src=storage-explorer.png dest=/opt/storage-explorer/icon.png
-  when: not storage_explorer_directory.stat.exists
-
-- name: add storage-explorer launcher
-  copy: src=storage-explorer.desktop dest="~/.local/share/applications/storage-explorer.desktop"
-  become: no
-  when: not storage_explorer_directory.stat.exists
+- name: Install azure cli
+  include: "azure-cli.yml"
+  when: az_cli_check.rc == 1
