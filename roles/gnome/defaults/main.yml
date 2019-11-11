@@ -105,7 +105,7 @@ gnome_settings:
     value: "true"
   - schema: "org.gnome.shell"
     key: "favorite-apps"
-    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'org.keepassxc.KeePassXC.desktop', 'code.desktop']"
+    value: "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop', 'libreoffice-writer.desktop', 'org.keepassxc.KeePassXC.desktop', 'code.desktop', 'jetbrains-phpstorm.desktop', 'jetbrains-webstorm.desktop', 'jetbrains-pycharm.desktop']"
   - schema: "org.gnome.desktop.interface"
     key: "enable-hot-corners"
     value: "true"
