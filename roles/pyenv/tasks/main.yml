@@ -1,0 +1,36 @@
+---
+- name: install python build tools
+  apt: name="{{ packages }}" state=latest force=yes
+  vars:
+    packages: "{{ pyenv_python_packages }}"
+
+- name: "Clone pyenv"
+  git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: "{{ lookup('env','HOME') }}/.pyenv"
+  become: no
+
+- name: Add pyenv environment variables
+  become: no
+  shell: "grep -qxF '{{ item }}' {{ lookup('env','HOME') }}/.bashrc || echo '{{ item }}' >> {{ lookup('env','HOME') }}/.bashrc"
+  with_items:
+    - 'export PYENV_ROOT="$HOME/.pyenv"'
+    - 'export PATH="$PYENV_ROOT/bin:$PATH"'
+
+- name: Add pyenv init
+  become: no
+  shell: "grep -qxF 'if command -v pyenv 1>/dev/null 2>&1; then' {{ lookup('env','HOME') }}/.bashrc || echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval \"$(pyenv init -)\"\nfi' >> {{ lookup('env','HOME') }}/.bashrc"
+
+- name: Install python version
+  become: no
+  shell: "{{ lookup('env','HOME') }}/.pyenv/bin/pyenv install -s {{ item }}"
+  with_items: "{{ python_versions }}"
+
+- name: Install pipenv
+  become: no
+  shell: "{{ lookup('env','HOME') }}/.pyenv/versions/{{ item }}/bin/pip install pipenv"
+  with_items: "{{ python_versions }}"
+
+- name: Deploy pipenv pyenv shims
+  copy: src=pipenv dest="{{ lookup('env','HOME') }}/.pyenv/shims/pipenv" mode="0755"
+  become: no
