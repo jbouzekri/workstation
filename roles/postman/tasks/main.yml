@@ -1,0 +1,32 @@
+---
+- name: check if postman is installed
+  stat: path=/opt/postman
+  register: postman_directory
+
+- name: Download postman package
+  get_url: url={{ postman_url }} dest=/tmp/postman.tar.gz
+  when: not postman_directory.stat.exists
+
+- name: Unarchive postman package
+  unarchive:
+    src: /tmp/postman.tar.gz
+    dest: /opt
+    remote_src: yes
+  when: not postman_directory.stat.exists
+
+- name: Rename postman folder
+  command: mv /opt/Postman /opt/postman
+  when: not postman_directory.stat.exists
+
+- name: Postman permissions
+  file: path="/opt/postman" owner="{{ lookup('env','USERNAME') }}" recurse="yes" state="directory"
+  when: not postman_directory.stat.exists
+
+- name: Remove downloaded tar
+  file: path=/tmp/postman.tar.gz state=absent
+  when: not postman_directory.stat.exists
+
+- name: Add postman launcher
+  copy: src=postman.desktop dest="~/.local/share/applications/postman.desktop"
+  become: no
+  when: not postman_directory.stat.exists
