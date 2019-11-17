@@ -63,7 +63,7 @@ gnome_extensions:
 # gsettings set org.gnome.shell.extensions.openweather pressure-unit 'hPa'
 # gsettings set org.gnome.shell.extensions.openweather city '48.9724604,1.9830623>Vernouillet, Saint-Germain-en-Laye, Yvelines, Île-de-France, France métropolitaine, 78540, France >-1'
 # gsettings set org.gnome.shell.extensions.openweather wind-speed-unit 'kph'
-# gsettings set org.gnome.shell.extensions.openweather position-in-panel 'right'
+# gsettings set org.gnome.shell.extensions.openweather position-in-panel 'center'
 # gsettings set org.gnome.shell.extensions.openweather menu-alignment 77.0
 
 gnome_settings:
@@ -141,7 +141,7 @@ gnome_settings:
     value: 'kph'
   - schema: "org.gnome.shell.extensions.openweather"
     key: "position-in-panel"
-    value: 'right'
+    value: 'center'
   - schema: "org.gnome.shell.extensions.openweather"
     key: "menu-alignment"
     value: '77.0'
