@@ -101,4 +101,5 @@ azure_cli_ubuntu_version: disco
 helm_versions:
   - 3.0.0
   - 2.16.1
+  - 2.11.0
 helm_latest_version: 3.0.0
