@@ -1,0 +1,38 @@
+---
+- name: check if helm is installed
+  stat: path="/usr/local/bin/helm-{{ item }}"
+  register: helm_executable
+
+- name: Download helm package
+  get_url: url="https://get.helm.sh/helm-v{{ item }}-linux-amd64.tar.gz" dest=/tmp/helm.tar.gz
+  when: not helm_executable.stat.exists
+
+- name: Unarchive helm package
+  unarchive:
+    src: /tmp/helm.tar.gz
+    dest: /tmp
+    remote_src: yes
+  when: not helm_executable.stat.exists
+
+- name: Rename helm
+  command: "mv /tmp/linux-amd64/helm /usr/local/bin/helm-{{ item }}"
+  when: not helm_executable.stat.exists
+
+- name: make helm executable
+  file: path="/usr/local/bin/helm-{{ item }}" state=touch mode="u+x,g+x,o+x"
+  when: not helm_executable.stat.exists
+
+- name: Remove downloaded tar
+  file: path=/tmp/helm.tar.gz state=absent
+  when: not helm_executable.stat.exists
+
+- name: Remove unarchived tar
+  file: path=/tmp/linux-amd64 state=absent
+  when: not helm_executable.stat.exists
+
+- name: Make a specific version the latest one
+  file:
+     src: "/usr/local/bin/helm-{{ item }}"
+     dest: "/usr/local/bin/helm"
+     state: link
+  when: not helm_executable.stat.exists and item == helm_latest_version

@@ -97,3 +97,8 @@ nvm_npm_global_packages:
 docker_ubuntu_version: disco
 virtualbox_ubuntu_version: disco
 azure_cli_ubuntu_version: disco
+
+helm_versions:
+  - 3.0.0
+  - 2.16.1
+helm_latest_version: 3.0.0

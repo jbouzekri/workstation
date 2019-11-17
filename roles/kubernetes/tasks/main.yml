@@ -1,0 +1,22 @@
+---
+- name: Install latest kubectl
+  shell: "curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
+  args:
+    warn: no
+
+- name: make lastest kubectl executable
+  file: path=/usr/local/bin/kubectl state=touch mode="u+x,g+x,o+x"
+
+- name: Install kubectl specific version
+  get_url: url="https://storage.googleapis.com/kubernetes-release/release/{{ item }}/bin/linux/amd64/kubectl" dest="/usr/local/bin/kubectl-{{ item }}"
+  with_items: "{{ kubectl_versions }}"
+
+- name: make kubectl specific version executable
+  file: path="/usr/local/bin/kubectl-{{ item }}" state=touch mode="u+x,g+x,o+x"
+  with_items: "{{ kubectl_versions }}"
+
+- name: make lastest kubectl executable
+  file: path=/usr/local/bin/kubectl state=touch mode="u+x,g+x,o+x"
+
+- include: helm.yml
+  with_items: "{{ helm_versions }}"
