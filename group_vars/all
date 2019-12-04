@@ -20,6 +20,7 @@ apt_debconf:
     debconf: name='oracle-java13-installer' question='shared/accepted-oracle-license-v1-2' value='true' vtype='select'
 
 apt_packages:
+  - apache2-utils
   - apt-transport-https
   - aptitude
   - atop
