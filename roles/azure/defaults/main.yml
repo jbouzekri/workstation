@@ -8,7 +8,7 @@ storage_explorer_dependencies:
   - gnome-keyring
 
 # Waiting for missing libgnome-keyring package
-install_azure_exporer: false
+install_azure_explorer: false
 
 azure_cli_dependencies:
   - ca-certificates
