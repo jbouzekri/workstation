@@ -17,6 +17,9 @@ gnome_extensions:
   - workspace-indicator@gnome-shell-extensions.gcampax.github.com
   - system-monitor@paradoxxx.zero.gmail.com
 
+gnome_wallpaper_lock_screen: "9355_1080p-stars-wallpaper.jpg"
+gnome_wallpaper_desktop_screen: "9355_1080p-stars-wallpaper.jpg"
+
 # Set theme
 # gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"
 # gsettings set org.gnome.desktop.interface icon-theme "Papirus"
@@ -87,10 +90,10 @@ gnome_settings:
     value: "#5789ca"
   - schema: "org.gnome.desktop.background"
     key: "picture-uri"
-    value: "file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg"
+    value: "file://{{ lookup('env','HOME') }}/Pictures/wallpapers/{{ gnome_wallpaper_desktop_screen }}"
   - schema: "org.gnome.desktop.screensaver"
     key: "picture-uri"
-    value: "file:///home/jobou/Pictures/wallpapers/9355_1080p-stars-wallpaper.jpg"
+    value: "file://{{ lookup('env','HOME') }}/Pictures/wallpapers/{{ gnome_wallpaper_lock_screen }}"
   - schema: "org.gnome.nautilus.preferences"
     key: "default-folder-viewer"
     value: "list-view"

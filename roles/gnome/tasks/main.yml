@@ -36,6 +36,12 @@
   tags:
     - gnome
 
+- name: Deploy wallpapers
+  copy: src="{{ item }}" dest="{{ lookup('env','HOME') }}/Pictures/wallpapers/{{ item }}"
+  with_items:
+    - "{{ gnome_wallpaper_lock_screen }}"
+    - "{{ gnome_wallpaper_desktop_screen }}"
+
 - name: Enable gnome extensions
   become: no
   shell: "gnome-extensions enable {{ item }}"
