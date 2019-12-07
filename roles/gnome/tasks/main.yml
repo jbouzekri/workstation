@@ -36,7 +36,15 @@
   tags:
     - gnome
 
+- name: Create wallpapers folder
+  become: no
+  file:
+    path: "{{ lookup('env','HOME') }}/Pictures/wallpapers/"
+    state: directory
+    mode: '0755'
+
 - name: Deploy wallpapers
+  become: no
   copy: src="{{ item }}" dest="{{ lookup('env','HOME') }}/Pictures/wallpapers/{{ item }}"
   with_items:
     - "{{ gnome_wallpaper_lock_screen }}"
