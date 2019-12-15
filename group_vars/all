@@ -46,6 +46,7 @@ apt_packages:
   - keepassxc
   - libglib2.0-dev
   - libreoffice
+  - mariadb-client
   - meld
   - mplayer
   - ncdu
