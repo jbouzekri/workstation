@@ -41,6 +41,7 @@ gnome_wallpaper_desktop_screen: "9355_1080p-stars-wallpaper.jpg"
 # gsettings set org.gnome.desktop.interface enable-hot-corners true
 # gsettings set org.gnome.desktop.privacy report-technical-problems false
 # gsettings set org.gnome.settings-daemon.plugins.orientation active false
+# gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 # 
 # ---
 #
@@ -119,6 +120,9 @@ gnome_settings:
   - schema: "org.gnome.settings-daemon.plugins.orientation"
     key: "active"
     value: "false"
+  - schema: "org.gnome.settings-daemon.peripherals.touchscreen"
+    key: "orientation-lock"
+    value: "true"
   - schema: "org.gnome.settings-daemon.plugins.media-keys"
     key: "screenshot"
     value: '[]'
