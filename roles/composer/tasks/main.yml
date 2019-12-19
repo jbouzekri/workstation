@@ -1,0 +1,6 @@
+---
+- name: Install composer
+  get_url: url="https://getcomposer.org/download/{{ composer_version }}/composer.phar" dest="/usr/local/bin/composer"
+
+- name: make composer executable
+  file: path=/usr/local/bin/composer state=touch mode="u+x,g+x,o+x"
