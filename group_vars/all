@@ -33,6 +33,7 @@ apt_packages:
   - ctorrent
   - curl
   - deluge
+  - dos2unix
   - filezilla
   - firefox
   - flameshot
@@ -57,6 +58,10 @@ apt_packages:
   - p7zip-full
   - p7zip-rar
   - pinta
+  - php-cli
+  - php-bcmath
+  - php-mbstring
+  - php-xml
   - python3
   - quodlibet
   - rar
