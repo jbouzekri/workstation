@@ -63,6 +63,7 @@ apt_packages:
   - php-mbstring
   - php-xml
   - python3
+  - python3-dev
   - quodlibet
   - rar
   - rsync
