@@ -1,0 +1,20 @@
+---
+- name: check if symfony is installed
+  stat: path=/usr/local/bin/symfony
+  register: symfony_binary
+
+- name: Download and install symfony tool
+  become: no
+  shell: >
+    wget https://get.symfony.com/cli/installer -O - | bash
+  args:
+    warn: no
+  when: not symfony_binary.stat.exists
+
+- name: move symfony to /usr/local/bin
+  copy: src="{{ lookup('env','HOME') }}/.symfony/bin/symfony" dest="/usr/local/bin/symfony" mode="0755"
+  when: not symfony_binary.stat.exists
+
+- name: Cleanup home folder 
+  file: path="{{ lookup('env','HOME') }}/.symfony" state=absent
+  become: no
