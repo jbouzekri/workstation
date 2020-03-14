@@ -26,6 +26,10 @@
   shell: "{{ lookup('env','HOME') }}/.pyenv/bin/pyenv install -s {{ item }}"
   with_items: "{{ python_versions }}"
 
+- name: Set global python 3 and 2 version
+  become: no
+  shell: "{{ lookup('env','HOME') }}/.pyenv/bin/pyenv global {{ python_3_version }} {{ python_2_version }}"
+
 - name: Install pipenv
   become: no
   shell: "{{ lookup('env','HOME') }}/.pyenv/versions/{{ item }}/bin/pip install pipenv"

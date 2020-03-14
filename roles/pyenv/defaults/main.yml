@@ -18,8 +18,11 @@ pyenv_python_packages:
   - libffi-dev
   - liblzma-dev
 
+python_2_version: 2.7.17
+python_3_version: 3.8.0
+
 python_versions:
-  - 2.7.17
+  - "{{ python_2_version }}"
   - 3.6.9
   - 3.7.5
-  - 3.8.0
+  - "{{ python_3_version }}"
