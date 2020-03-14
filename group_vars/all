@@ -51,6 +51,7 @@ apt_packages:
   - meld
   - mplayer
   - ncdu
+  - net-tools
   - ntfs-3g
   - ntp
   - oracle-java13-installer
