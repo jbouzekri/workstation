@@ -59,8 +59,9 @@ apt_packages:
   - p7zip-full
   - p7zip-rar
   - pinta
-  - php-cli
   - php-bcmath
+  - php-cli
+  - php-curl
   - php-mbstring
   - php-xml
   - python3
