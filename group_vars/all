@@ -59,6 +59,7 @@ apt_packages:
   - p7zip-full
   - p7zip-rar
   - pinta
+  - php-amqp
   - php-bcmath
   - php-cli
   - php-curl
